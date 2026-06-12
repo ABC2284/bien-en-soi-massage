@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration | Bien en Soi Massage</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="texture-bg" aria-hidden="true"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a href="index.html" class="brand">
+        <img src="images/logo.svg" alt="" class="brand-mark" aria-hidden="true">
+        <span class="brand-text">
+          Bien en Soi Massage
+          <small>Administration</small>
+        </span>
+      </a>
+      <ul class="nav-links" style="position:static; transform:none; flex-direction:row; padding:0; border:none; box-shadow:none; background:transparent;">
+        <li><a href="index.html">← Retour au site</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-header">
+      <div class="container">
+        <p class="hero-eyebrow">Espace privé</p>
+        <h1>Gestion des produits</h1>
+        <p>Ajoutez, modifiez ou retirez les produits affichés sur la page « Produits » du site.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container admin-shell">
+
+        <!-- ===================== LOGIN ===================== -->
+        <div id="login-card" class="admin-card admin-login">
+          <h2>Connexion</h2>
+          <p class="admin-sub">Entrez le mot de passe pour accéder à la gestion des produits.</p>
+          <div id="login-msg" class="admin-msg error"></div>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="password">Mot de passe</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">Se connecter</button>
+          </form>
+        </div>
+
+        <!-- ===================== ADMIN PANEL (hidden until login) ===================== -->
+        <div id="admin-panel" style="display:none;">
+
+          <!-- Add product form -->
+          <div class="admin-card">
+            <h2>Ajouter un produit</h2>
+            <p class="admin-sub">Remplissez les informations ci-dessous. Le produit apparaîtra immédiatement sur la page « Produits ».</p>
+
+            <div id="form-msg" class="admin-msg"></div>
+
+            <form id="product-form">
+              <div class="form-group">
+                <label for="nom">Nom du produit</label>
+                <input type="text" id="nom" name="nom" required placeholder="Ex. : Huile de massage à la lavande">
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Décrivez le produit en quelques mots…"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="prix">Prix (CAD)</label>
+                <input type="number" id="prix" name="prix" min="0" step="0.01" required placeholder="Ex. : 24.99">
+              </div>
+
+              <div class="form-group">
+                <label for="image">Photo du produit</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <p class="form-hint">Format JPG ou PNG recommandé. L'image sera téléversée automatiquement.</p>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">Ajouter le produit</button>
+            </form>
+          </div>
+
+          <!-- Existing products list -->
+          <div class="admin-card">
+            <h2>Produits actuels</h2>
+            <p class="admin-sub">Cliquez sur « Supprimer » pour retirer un produit du site.</p>
+            <div id="admin-products-list" class="admin-products-list"></div>
+            <div id="admin-products-empty" style="display:none; text-align:center; color:#8A7666; padding:24px 0;">
+              Aucun produit ajouté pour le moment.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Page d'administration.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/produits.js"></script>
+  <script>
+    /* =========================================================
+       ⚠️ Mot de passe d'accès à l'administration.
+       Changez cette valeur pour quelque chose de personnel.
+       Ceci est une protection simple, pas un système de
+       sécurité avancé — ne l'utilisez pas pour des données
+       très sensibles.
+       ========================================================= */
+    const ADMIN_PASSWORD = "bienensoi2026";
+
+    const loginCard = document.getElementById('login-card');
+    const adminPanel = document.getElementById('admin-panel');
+    const loginForm = document.getElementById('login-form');
+    const loginMsg = document.getElementById('login-msg');
+
+    // Check if already logged in this session
+    if (sessionStorage.getItem('bes_admin_ok') === 'true') {
+      showAdmin();
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = document.getElementById('password').value;
+      if (value === ADMIN_PASSWORD) {
+        sessionStorage.setItem('bes_admin_ok', 'true');
+        showAdmin();
+      } else {
+        loginMsg.textContent = "Mot de passe incorrect. Veuillez réessayer.";
+        loginMsg.classList.add('show');
+      }
+    });
+
+    function showAdmin(){
+      loginCard.style.display = 'none';
+      adminPanel.style.display = 'block';
+      loadProducts();
+    }
+
+    // ===================== Product form =====================
+    const productForm = document.getElementById('product-form');
+    const formMsg = document.getElementById('form-msg');
+    const submitBtn = document.getElementById('submit-btn');
+
+    productForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formMsg.className = 'admin-msg';
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Ajout en cours…";
+
+      const nom = document.getElementById('nom').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const prix = document.getElementById('prix').value;
+      const imageFile = document.getElementById('image').files[0];
+
+      let image_url = null;
+
+      if (imageFile) {
+        const { data, error } = await uploadProductImage(imageFile);
+        if (error) {
+          showMsg('error', "Erreur lors du téléversement de l'image : " + (error.message || error));
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Ajouter le produit";
+          return;
+        }
+        image_url = data.publicUrl;
+      }
+
+      const { error } = await addProduct({ nom, description, prix, image_url });
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Ajouter le produit";
+
+      if (error) {
+        showMsg('error', "Erreur lors de l'ajout du produit : " + (error.message || error));
+        return;
+      }
+
+      showMsg('success', "Produit ajouté avec succès !");
+      productForm.reset();
+      loadProducts();
+    });
+
+    function showMsg(type, text){
+      formMsg.textContent = text;
+      formMsg.className = 'admin-msg ' + type + ' show';
+    }
+
+    // ===================== Product list =====================
+    async function loadProducts(){
+      const list = document.getElementById('admin-products-list');
+      const emptyMsg = document.getElementById('admin-products-empty');
+      list.innerHTML = '';
+
+      const products = await fetchProducts();
+
+      if (!products.length) {
+        emptyMsg.style.display = 'block';
+        return;
+      }
+      emptyMsg.style.display = 'none';
+
+      products.forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'admin-product-row';
+
+        const imgHtml = p.image_url
+          ? `<img src="${p.image_url}" alt="">`
+          : `<div style="width:64px;height:64px;border-radius:10px;background:var(--taupe);"></div>`;
+
+        row.innerHTML = `
+          ${imgHtml}
+          <div class="admin-product-info">
+            <h4>${p.nom || 'Produit'}</h4>
+            <span class="price-tag">${formatPrice(p.prix)}</span>
+          </div>
+          <button class="btn-delete" data-id="${p.id}">Supprimer</button>
+        `;
+        list.appendChild(row);
+      });
+
+      list.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Supprimer ce produit définitivement ?')) return;
+          btn.disabled = true;
+          btn.textContent = '…';
+          await deleteProduct(btn.dataset.id);
+          loadProducts();
+        });
+      });
+    }
+  </script>
+</body>
+</html>
