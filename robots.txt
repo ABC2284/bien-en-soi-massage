@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://bienensoimassage.com/sitemap.xml
+Sitemap: https://abc2284.github.io/bien-en-soi-massage/sitemap.xml
