@@ -12,394 +12,22 @@
   <meta property="og:description" content="Massage thérapeutique, suédois, femme enceinte, drainage lymphatique, réflexologie plantaire et plus encore à Québec.">
   <meta property="og:locale" content="fr_CA">
 
-  <!-- Google Fonts (exactement vos polices) -->
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* =========================================================
-       Centre de Thérapie par le Massage - Bien en Soi
-       Design tokens (EXACTEMENT vos variables)
-       ========================================================= */
-    :root{
-      --cream:        #FAF6F0;
-      --cream-deep:   #F1E8DC;
-      --taupe:        #E8DDD0;
-      --walnut:       #6B4226;
-      --walnut-dark:  #4A2D19;
-      --terracotta:   #C97B5C;
-      --terracotta-soft: #E0A98A;
-      --sage:         #8A9B6E;
-      --sage-soft:    #B7C4A4;
-      --ink:          #2D2420;
-
-      --font-display: "Fraunces", serif;
-      --font-body: "Work Sans", sans-serif;
-
-      --radius-soft: 28px;
-      --shadow-card: 0 10px 30px -12px rgba(74, 45, 25, 0.25);
-      --ease: cubic-bezier(.22,.61,.36,1);
-    }
-
-    *{ margin:0; padding:0; box-sizing:border-box; }
-
-    html{ scroll-behavior:smooth; }
-
-    body{
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x:hidden;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-
-    h1,h2,h3,h4{
-      font-family: var(--font-display);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--walnut-dark);
-    }
-
-    .container{
-      width:100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Texture de fond */
-    .texture-bg{
-      position: fixed;
-      inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(ellipse at 15% 0%, rgba(201,123,92,0.10), transparent 55%),
-        radial-gradient(ellipse at 85% 100%, rgba(138,155,110,0.10), transparent 55%),
-        var(--cream);
-      pointer-events:none;
-    }
-
-    /* Header / Nav (identique à votre design) */
-    .site-header{
-      position: sticky;
-      top:0;
-      z-index: 100;
-      background: rgba(250,246,240,0.88);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(107,66,38,0.08);
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 18px 24px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight:700;
-      color: var(--walnut-dark);
-    }
-
-    .brand-mark{
-      width:38px; height:38px;
-      flex-shrink:0;
-    }
-
-    .brand-text small{
-      display:block;
-      font-family: var(--font-body);
-      font-weight:400;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-top: 2px;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap: 36px;
-      list-style:none;
-    }
-
-    .nav-links a{
-      font-size: 0.95rem;
-      font-weight:500;
-      color: var(--walnut-dark);
-      position:relative;
-      padding: 6px 0;
-      transition: color .25s var(--ease);
-    }
-
-    .nav-links a::after{
-      content:"";
-      position:absolute;
-      left:0; bottom:0;
-      height:2px; width:0;
-      background: var(--terracotta);
-      transition: width .3s var(--ease);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a[aria-current="page"]::after{
-      width:100%;
-    }
-
-    .nav-links a[aria-current="page"]{
-      color: var(--terracotta);
-    }
-
-    .nav-cta{
-      background: var(--terracotta);
-      color: var(--cream) !important;
-      padding: 11px 24px;
-      border-radius: 999px;
-      font-weight:600;
-      font-size:0.9rem;
-      white-space:nowrap;
-      transition: background .25s var(--ease), transform .25s var(--ease);
-      box-shadow: 0 8px 20px -8px rgba(201,123,92,0.6);
-    }
-    .nav-cta:hover{
-      background: var(--walnut);
-      transform: translateY(-2px);
-    }
-    .nav-cta::after{ display:none; }
-
-    .nav-toggle{
-      display:none;
-      background:none;
-      border:none;
-      cursor:pointer;
-      padding:8px;
-    }
-    .nav-toggle span{
-      display:block;
-      width:24px; height:2px;
-      background: var(--walnut-dark);
-      margin: 5px 0;
-      transition: transform .3s var(--ease), opacity .3s var(--ease);
-    }
-
-    /* Page header */
-    .page-header{
-      padding: 64px 0 40px;
-      text-align:center;
-    }
-    .hero-eyebrow{
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    .page-header h1{
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-    }
-    .page-header p{
-      max-width: 600px;
-      margin: 18px auto 0;
-      color:#5C4B3E;
-      font-size:1.05rem;
-    }
-
-    /* Section */
-    .section{
-      padding: 88px 0;
-    }
-
-    /* Détail des services */
-    .service-detail{
-      display:grid;
-      grid-template-columns: 70px 1fr;
-      gap: 26px;
-      padding: 32px 0;
-      border-bottom: 1px solid rgba(107,66,38,0.1);
-    }
-    .service-detail:last-child{ border-bottom:none; }
-
-    .service-detail-icon{
-      width:56px; height:56px;
-      border-radius:16px;
-      background: var(--cream-deep);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: var(--terracotta);
-    }
-    .service-detail-icon svg{
-      width:28px; height:28px;
-    }
-    .service-detail h3{
-      font-size:1.3rem;
-      margin-bottom:8px;
-    }
-    .service-detail p{
-      color:#5C4B3E;
-    }
-
-    /* Booking CTA */
-    .booking-card{
-      background: linear-gradient(150deg, var(--terracotta), var(--terracotta-soft));
-      color: var(--cream);
-      border-radius:24px;
-      padding: 44px;
-      text-align:center;
-      box-shadow: 0 16px 36px -14px rgba(201,123,92,0.5);
-    }
-    .booking-card h3{
-      color: var(--cream);
-      font-size:1.6rem;
-      margin-bottom:14px;
-    }
-    .booking-card p{
-      margin-bottom: 28px;
-      opacity:0.92;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 16px 32px;
-      border-radius: 999px;
-      font-weight:600;
-      font-size: 0.98rem;
-      transition: all .3s var(--ease);
-      border: 2px solid transparent;
-    }
-    .btn-primary{
-      background: var(--walnut);
-      color: var(--cream);
-      box-shadow: 0 12px 28px -10px rgba(74,45,25,0.45);
-    }
-    .btn-primary:hover{
-      background: var(--terracotta);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px -10px rgba(201,123,92,0.55);
-    }
-
-    /* Footer */
-    .site-footer{
-      background: var(--walnut-dark);
-      color: var(--cream-deep);
-      margin-top: 100px;
-      padding: 64px 0 28px;
-    }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .brand{
-      color: var(--cream);
-      margin-bottom:14px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .footer-brand p{
-      color: #C9B8AC;
-      max-width: 320px;
-      font-size:0.92rem;
-    }
-    .footer-col h4{
-      color: var(--terracotta-soft);
-      font-size:0.85rem;
-      letter-spacing:0.15em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
-    .footer-col ul{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .footer-col a, .footer-col p{
-      color:#D9CCC2;
-      font-size:0.92rem;
-      transition: color .2s;
-    }
-    .footer-col a:hover{
-      color: var(--terracotta-soft);
-    }
-    .footer-bottom{
-      border-top: 1px solid rgba(250,246,240,0.1);
-      padding-top: 24px;
-      text-align:center;
-      font-size:0.85rem;
-      color:#9C8C80;
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .footer-grid{
-        grid-template-columns:1fr 1fr;
-      }
-      .footer-brand{
-        grid-column: 1 / -1;
-      }
-    }
-    @media (max-width: 720px){
-      .nav-links{
-        position:fixed;
-        top:74px; left:0; right:0;
-        background: var(--cream);
-        flex-direction:column;
-        align-items:flex-start;
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid rgba(107,66,38,0.08);
-        transform: translateY(-110%);
-        transition: transform .35s var(--ease);
-        box-shadow: 0 16px 30px -16px rgba(74,45,25,0.2);
-        z-index:99;
-      }
-      .nav-links.open{
-        transform: translateY(0);
-      }
-      .nav-toggle{
-        display:block;
-      }
-      .nav-cta{
-        margin-top:8px;
-      }
-      .section{
-        padding:64px 0;
-      }
-      .service-detail{
-        grid-template-columns:56px 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="texture-bg" aria-hidden="true"></div>
+  <div class="texture-bg" aria-hidden="true"></div>
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
 
-<header class="site-header">
-  <div class="container" style="padding:0;">
-    <nav class="nav">
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
       <a href="index.html" class="brand">
-        <!-- Logo SVG conforme à votre identité : cercle, croix, petit cercle intérieur -->
-        <svg class="brand-mark" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="26" stroke="#6B4226" stroke-width="1.5" fill="#FAF6F0"/>
-          <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="30" cy="30" r="8" fill="#8A9B6E"/>
-          <path d="M30 8 C34 18, 44 20, 46 30 C48 40, 40 48, 30 52 C20 48, 12 40, 14 30 C16 20, 26 18, 30 8 Z" stroke="#E0A98A" stroke-width="0.8" fill="none" opacity="0.4"/>
-        </svg>
+        <img src="logo.svg" alt="" class="brand-mark" aria-hidden="true">
         <span class="brand-text">
           Bien en Soi Massage
           <small>Centre de thérapie par le massage</small>
@@ -417,143 +45,128 @@
         <li><a href="https://www.gorendezvous.com/BienenSoiMassage" class="nav-cta" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
       </ul>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <section class="page-header">
+  <main id="main">
+    <section class="page-header">
+      <div class="container">
+        <p class="hero-eyebrow">Liste des soins offerts</p>
+        <h1>Nos services</h1>
+        <p>Chaque soin est offert par Martine Charles, massothérapeute diplômée, et adapté à vos besoins spécifiques pour un mieux-être durable du corps et de l'esprit.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width:880px;">
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 28c0-8 7-14 16-14s16 6 16 14"/><path d="M8 28h32v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/><circle cx="24" cy="12" r="3"/></svg>
+          </div>
+          <div><h3>Massage thérapeutique</h3><p>Une approche ciblée pour traiter les tensions musculaires, les douleurs chroniques et les raideurs. Idéal pour retrouver mobilité et confort au quotidien.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6c-8 8-14 14-14 22a14 14 0 0 0 28 0c0-8-6-14-14-22z"/></svg>
+          </div>
+          <div><h3>Massage suédois (détente)</h3><p>Des manœuvres enveloppantes et fluides pour relâcher les tensions, apaiser le système nerveux et offrir un véritable moment de détente.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="14" r="6"/><path d="M24 20c-8 0-12 6-12 14v6h24v-6c0-8-4-14-12-14z"/><circle cx="24" cy="28" r="4"/></svg>
+          </div>
+          <div><h3>Massage femme enceinte</h3><p>Un soin doux et sécuritaire, pensé pour soulager les inconforts liés à la grossesse et offrir un moment de répit bien mérité.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6v8M24 34v8M6 24h8M34 24h8"/><circle cx="24" cy="24" r="10"/></svg>
+          </div>
+          <div><h3>Drainage lymphatique</h3><p>Une technique douce et rythmée qui stimule la circulation lymphatique, réduit la rétention d'eau et favorise l'élimination naturelle des toxines.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 40c0-10 4-18 4-26a6 6 0 0 1 12 0c0 8 4 16 4 26"/><path d="M14 40h20"/></svg>
+          </div>
+          <div><h3>Réflexologie plantaire</h3><p>Par une pression précise sur les points réflexes des pieds, ce soin aide à rééquilibrer le corps entier et procure une sensation de légèreté immédiate.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 12c4 6 4 12 0 18M36 12c-4 6-4 12 0 18"/><path d="M24 8c4 8 4 16 0 32"/></svg>
+          </div>
+          <div><h3>Traitement lombalgie</h3><p>Un travail manuel ciblé sur le bas du dos pour soulager les douleurs lombaires et redonner de la souplesse à la région.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 6v10M32 6v10M10 16h28l-3 26H13z"/></svg>
+          </div>
+          <div><h3>Traitement dorsalgie</h3><p>Un soin spécifique pour relâcher les tensions du haut du dos et des épaules, souvent causées par le stress ou de longues heures assises.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="24" cy="20" rx="14" ry="10"/><path d="M16 30c0 6 3 10 8 10s8-4 8-10"/></svg>
+          </div>
+          <div><h3>Décongestion pulmonaire</h3><p>Des manœuvres respiratoires douces qui favorisent un meilleur dégagement des voies respiratoires et une respiration plus libre.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 24c0-8 5.4-14 12-14s12 6 12 14-5.4 14-12 14-12-6-12-14z"/><path d="M18 24h12M24 18v12"/></svg>
+          </div>
+          <div><h3>Décongestion musculaire</h3><p>Un soin axé sur le relâchement des fibres musculaires profondes pour diminuer la sensation de lourdeur et de raideur.</p></div>
+        </div>
+        <div class="service-detail">
+          <div class="service-detail-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6c-8 8-14 14-14 22a14 14 0 0 0 28 0c0-8-6-14-14-22z"/><circle cx="24" cy="26" r="4"/></svg>
+          </div>
+          <div><h3>Soins holistiques Reiki</h3><p>Une approche énergétique douce qui favorise la relaxation profonde, l'équilibre intérieur et un sentiment de bien-être global.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Réservation">
+      <div class="container">
+        <div class="booking-card">
+          <h3>Prêt·e à réserver votre soin ?</h3>
+          <p>Choisissez le service qui vous convient et réservez directement en ligne.</p>
+          <a href="https://www.gorendezvous.com/BienenSoiMassage" class="btn btn-primary" target="_blank" rel="noopener">Prendre rendez-vous</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
     <div class="container">
-      <div class="hero-eyebrow">Liste des soins offerts</div>
-      <h1>Nos services</h1>
-      <p>Chaque soin est offert par Martine Charles, massothérapeute diplômée, et adapté à vos besoins spécifiques pour un mieux-être durable du corps et de l'esprit.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <img src="logo.svg" alt="" class="brand-mark" aria-hidden="true">
+            Bien en Soi Massage
+          </a>
+          <p>Centre de thérapie par le massage à Québec. Un esprit léger dans un corps détendu, grâce à des soins personnalisés et bienveillants<a href="admin.html" class="admin-dot" aria-label="Administration" title="">.</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="produits.html">Produits</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Coordonnées</h4>
+          <ul>
+            <li><p>5600 boul. des Galeries, suite 125<br>Québec, QC, G2K 2H6</p></li>
+            <li><a href="tel:+15813092948">(581) 309-2948</a></li>
+            <li><a href="mailto:bienensoimassage@outlook.com">bienensoimassage@outlook.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Tous droits réservés.
+      </div>
     </div>
-  </section>
+  </footer>
 
-  <section class="section">
-    <div class="container" style="max-width:880px;">
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 28c0-8 7-14 16-14s16 6 16 14"/><path d="M8 28h32v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/><circle cx="24" cy="12" r="3"/></svg>
-        </div>
-        <div><h3>Massage thérapeutique</h3><p>Une approche ciblée pour traiter les tensions musculaires, les douleurs chroniques et les raideurs. Idéal pour retrouver mobilité et confort au quotidien.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6c-8 8-14 14-14 22a14 14 0 0 0 28 0c0-8-6-14-14-22z"/></svg>
-        </div>
-        <div><h3>Massage suédois (détente)</h3><p>Des manœuvres enveloppantes et fluides pour relâcher les tensions, apaiser le système nerveux et offrir un véritable moment de détente.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="14" r="6"/><path d="M24 20c-8 0-12 6-12 14v6h24v-6c0-8-4-14-12-14z"/><circle cx="24" cy="28" r="4"/></svg>
-        </div>
-        <div><h3>Massage femme enceinte</h3><p>Un soin doux et sécuritaire, pensé pour soulager les inconforts liés à la grossesse et offrir un moment de répit bien mérité.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6v8M24 34v8M6 24h8M34 24h8"/><circle cx="24" cy="24" r="10"/></svg>
-        </div>
-        <div><h3>Drainage lymphatique</h3><p>Une technique douce et rythmée qui stimule la circulation lymphatique, réduit la rétention d'eau et favorise l'élimination naturelle des toxines.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 40c0-10 4-18 4-26a6 6 0 0 1 12 0c0 8 4 16 4 26"/><path d="M14 40h20"/></svg>
-        </div>
-        <div><h3>Réflexologie plantaire</h3><p>Par une pression précise sur les points réflexes des pieds, ce soin aide à rééquilibrer le corps entier et procure une sensation de légèreté immédiate.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 12c4 6 4 12 0 18M36 12c-4 6-4 12 0 18"/><path d="M24 8c4 8 4 16 0 32"/></svg>
-        </div>
-        <div><h3>Traitement lombalgie</h3><p>Un travail manuel ciblé sur le bas du dos pour soulager les douleurs lombaires et redonner de la souplesse à la région.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 6v10M32 6v10M10 16h28l-3 26H13z"/></svg>
-        </div>
-        <div><h3>Traitement dorsalgie</h3><p>Un soin spécifique pour relâcher les tensions du haut du dos et des épaules, souvent causées par le stress ou de longues heures assises.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="24" cy="20" rx="14" ry="10"/><path d="M16 30c0 6 3 10 8 10s8-4 8-10"/></svg>
-        </div>
-        <div><h3>Décongestion pulmonaire</h3><p>Des manœuvres respiratoires douces qui favorisent un meilleur dégagement des voies respiratoires et une respiration plus libre.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 24c0-8 5.4-14 12-14s12 6 12 14-5.4 14-12 14-12-6-12-14z"/><path d="M18 24h12M24 18v12"/></svg>
-        </div>
-        <div><h3>Décongestion musculaire</h3><p>Un soin axé sur le relâchement des fibres musculaires profondes pour diminuer la sensation de lourdeur et de raideur.</p></div>
-      </div>
-      <div class="service-detail">
-        <div class="service-detail-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6c-8 8-14 14-14 22a14 14 0 0 0 28 0c0-8-6-14-14-22z"/><circle cx="24" cy="26" r="4"/></svg>
-        </div>
-        <div><h3>Soins holistiques Reiki</h3><p>Une approche énergétique douce qui favorise la relaxation profonde, l'équilibre intérieur et un sentiment de bien-être global.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-label="Réservation">
-    <div class="container">
-      <div class="booking-card">
-        <h3>Prêt·e à réserver votre soin ?</h3>
-        <p>Choisissez le service qui vous convient et réservez directement en ligne.</p>
-        <a href="https://www.gorendezvous.com/BienenSoiMassage" class="btn btn-primary" target="_blank" rel="noopener">Prendre rendez-vous</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="brand" style="color:var(--cream);">
-          <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="26" stroke="#E0A98A" stroke-width="1.2" fill="none"/>
-            <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="8" fill="#8A9B6E"/>
-          </svg>
-          Bien en Soi Massage
-        </a>
-        <p>Centre de thérapie par le massage à Québec. Un esprit léger dans un corps détendu, grâce à des soins personnalisés et bienveillants.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="produits.html">Produits</a></li>
-          <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Coordonnées</h4>
-        <ul>
-          <li>5600 boul. des Galeries, suite 125<br>Québec, QC, G2K 2H6</li>
-          <li><a href="tel:+15813092948">(581) 309-2948</a></li>
-          <li><a href="mailto:bienensoimassage@outlook.com">bienensoimassage@outlook.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Tous droits réservés.
-    </div>
-  </div>
-</footer>
-
-<script>
-  const toggleBtn = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true' ? false : true;
-      toggleBtn.setAttribute('aria-expanded', expanded);
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
+  <script src="main.js"></script>
 </body>
 </html>
