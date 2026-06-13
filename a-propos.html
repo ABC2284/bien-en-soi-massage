@@ -12,482 +12,22 @@
   <meta property="og:description" content="Martine Charles, massothérapeute diplômée, vous accompagne vers le bien-être au Centre de Thérapie par le Massage Bien en Soi, à Québec.">
   <meta property="og:locale" content="fr_CA">
 
-  <!-- Google Fonts (les mêmes que votre CSS) -->
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tout le CSS original, légèrement adapté pour être autonome (pas de dépendance externe) -->
-  <style>
-    /* =========================================================
-       Centre de Thérapie par le Massage - Bien en Soi
-       Design tokens (exactement vos variables)
-       ========================================================= */
-    :root{
-      --cream:        #FAF6F0;
-      --cream-deep:   #F1E8DC;
-      --taupe:        #E8DDD0;
-      --walnut:       #6B4226;
-      --walnut-dark:  #4A2D19;
-      --terracotta:   #C97B5C;
-      --terracotta-soft: #E0A98A;
-      --sage:         #8A9B6E;
-      --sage-soft:    #B7C4A4;
-      --ink:          #2D2420;
-
-      --font-display: "Fraunces", serif;
-      --font-body: "Work Sans", sans-serif;
-
-      --radius-soft: 28px;
-      --shadow-card: 0 10px 30px -12px rgba(74, 45, 25, 0.25);
-      --ease: cubic-bezier(.22,.61,.36,1);
-    }
-
-    *{ margin:0; padding:0; box-sizing:border-box; }
-
-    html{ scroll-behavior:smooth; }
-
-    body{
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x:hidden;
-    }
-
-    img{ max-width:100%; display:block; }
-
-    a{ color:inherit; text-decoration:none; }
-
-    h1,h2,h3,h4{
-      font-family: var(--font-display);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--walnut-dark);
-    }
-
-    .container{
-      width:100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Skip link for accessibility */
-    .skip-link{
-      position:absolute; left:-999px; top:auto;
-    }
-    .skip-link:focus{
-      position:fixed; left:16px; top:16px; z-index:999;
-      background:var(--walnut); color:var(--cream);
-      padding:10px 18px; border-radius:8px;
-    }
-
-    :focus-visible{
-      outline: 3px solid var(--terracotta);
-      outline-offset: 3px;
-    }
-
-    /* Background texture */
-    .texture-bg{
-      position: fixed;
-      inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(ellipse at 15% 0%, rgba(201,123,92,0.10), transparent 55%),
-        radial-gradient(ellipse at 85% 100%, rgba(138,155,110,0.10), transparent 55%),
-        var(--cream);
-      pointer-events:none;
-    }
-
-    /* Header / Nav */
-    .site-header{
-      position: sticky;
-      top:0;
-      z-index: 100;
-      background: rgba(250,246,240,0.88);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(107,66,38,0.08);
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 18px 24px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight:700;
-      color: var(--walnut-dark);
-    }
-
-    .brand-mark{
-      width:38px; height:38px;
-      flex-shrink:0;
-    }
-
-    .brand-text small{
-      display:block;
-      font-family: var(--font-body);
-      font-weight:400;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-top: 2px;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap: 36px;
-      list-style:none;
-    }
-
-    .nav-links a{
-      font-size: 0.95rem;
-      font-weight:500;
-      color: var(--walnut-dark);
-      position:relative;
-      padding: 6px 0;
-      transition: color .25s var(--ease);
-    }
-
-    .nav-links a::after{
-      content:"";
-      position:absolute;
-      left:0; bottom:0;
-      height:2px; width:0;
-      background: var(--terracotta);
-      transition: width .3s var(--ease);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a[aria-current="page"]::after{
-      width:100%;
-    }
-
-    .nav-links a[aria-current="page"]{
-      color: var(--terracotta);
-    }
-
-    .nav-cta{
-      background: var(--terracotta);
-      color: var(--cream) !important;
-      padding: 11px 24px;
-      border-radius: 999px;
-      font-weight:600;
-      font-size:0.9rem;
-      white-space:nowrap;
-      transition: background .25s var(--ease), transform .25s var(--ease);
-      box-shadow: 0 8px 20px -8px rgba(201,123,92,0.6);
-    }
-    .nav-cta:hover{
-      background: var(--walnut);
-      transform: translateY(-2px);
-    }
-    .nav-cta::after{ display:none; }
-
-    .nav-toggle{
-      display:none;
-      background:none;
-      border:none;
-      cursor:pointer;
-      padding:8px;
-    }
-    .nav-toggle span{
-      display:block;
-      width:24px; height:2px;
-      background: var(--walnut-dark);
-      margin: 5px 0;
-      transition: transform .3s var(--ease), opacity .3s var(--ease);
-    }
-
-    /* Page header */
-    .page-header{
-      padding: 64px 0 40px;
-      text-align:center;
-    }
-    .hero-eyebrow{
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 16px;
-      justify-content:center;
-    }
-    .page-header h1{
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-    }
-    .page-header p{
-      max-width: 600px;
-      margin: 18px auto 0;
-      color:#5C4B3E;
-      font-size:1.05rem;
-    }
-
-    /* Sections */
-    .section{
-      padding: 88px 0;
-    }
-    .section-alt{
-      background: var(--cream-deep);
-      border-radius: var(--radius-soft);
-      margin: 0 24px;
-    }
-    .section-alt .container{ max-width: 1132px; }
-
-    .about-grid{
-      display:grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 64px;
-      align-items:center;
-    }
-
-    .about-photo{
-      position:relative;
-      border-radius: 30px;
-      overflow:hidden;
-      box-shadow: var(--shadow-card);
-      aspect-ratio: 4/5;
-      background: linear-gradient(160deg, var(--sage-soft) 0%, var(--sage) 50%, var(--walnut) 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .about-photo .texture-lines{
-      position:absolute; inset:0;
-      background:
-        repeating-linear-gradient(70deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 2px, transparent 2px, transparent 24px);
-      mix-blend-mode: overlay;
-    }
-    .about-photo .glow-spot{
-      position:absolute;
-      width:60%; height:60%;
-      border-radius:50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
-      bottom:-15%; right:-15%;
-      filter: blur(14px);
-    }
-    .about-photo svg{
-      position:relative; z-index:1;
-      width:46%; height:46%;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .about-content h2{
-      font-size: clamp(2rem, 3.4vw, 2.6rem);
-      margin-bottom: 20px;
-    }
-    .about-content p{
-      margin-bottom: 18px;
-      color:#5C4B3E;
-    }
-    .credential-list{
-      list-style:none;
-      margin: 26px 0;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .credential-list li{
-      display:flex;
-      align-items:flex-start;
-      gap: 14px;
-      font-weight:500;
-      color: var(--walnut-dark);
-    }
-    .credential-list svg{
-      flex-shrink:0;
-      width:22px; height:22px;
-      color: var(--sage);
-      margin-top:2px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 16px 32px;
-      border-radius: 999px;
-      font-weight:600;
-      font-size: 0.98rem;
-      transition: all .3s var(--ease);
-      border: 2px solid transparent;
-    }
-
-    .btn-primary{
-      background: var(--walnut);
-      color: var(--cream);
-      box-shadow: 0 12px 28px -10px rgba(74,45,25,0.45);
-    }
-    .btn-primary:hover{
-      background: var(--terracotta);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px -10px rgba(201,123,92,0.55);
-    }
-
-    .quote-band{
-      background: linear-gradient(135deg, var(--walnut-dark), var(--walnut));
-      color: var(--cream);
-      border-radius: var(--radius-soft);
-      margin: 0 24px;
-      padding: 90px 40px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .quote-band::before{
-      content:"";
-      position:absolute;
-      width: 420px; height:420px;
-      border-radius:50%;
-      background: radial-gradient(circle, rgba(201,123,92,0.25), transparent 70%);
-      top: -180px; right: -120px;
-    }
-    .quote-band blockquote{
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.4rem);
-      font-style: italic;
-      max-width: 760px;
-      margin: 0 auto 18px;
-      position:relative;
-      z-index:1;
-    }
-    .quote-band cite{
-      font-size:0.85rem;
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      color: var(--terracotta-soft);
-      font-style:normal;
-      font-weight:600;
-    }
-
-    .benefits{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 32px;
-    }
-    .benefit{
-      text-align:center;
-      padding: 28px 18px;
-    }
-    .benefit-num{
-      font-family: var(--font-display);
-      font-size: 2.6rem;
-      color: var(--sage-soft);
-      margin-bottom: 8px;
-      line-height:1;
-    }
-    .benefit h4{
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-    }
-    .benefit p{
-      font-size:0.9rem;
-      color:#6E5B4D;
-    }
-
-    /* Footer */
-    .site-footer{
-      background: var(--walnut-dark);
-      color: var(--cream-deep);
-      margin-top: 100px;
-      padding: 64px 0 28px;
-    }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .brand{ color: var(--cream); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
-    .footer-brand p{
-      color: #C9B8AC;
-      max-width: 320px;
-      font-size:0.92rem;
-    }
-    .footer-col h4{
-      color: var(--terracotta-soft);
-      font-size:0.85rem;
-      letter-spacing:0.15em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
-    .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:12px; }
-    .footer-col a, .footer-col p{
-      color:#D9CCC2;
-      font-size:0.92rem;
-      transition: color .2s;
-    }
-    .footer-col a:hover{ color: var(--terracotta-soft); }
-    .footer-bottom{
-      border-top: 1px solid rgba(250,246,240,0.1);
-      padding-top: 24px;
-      text-align:center;
-      font-size:0.85rem;
-      color:#9C8C80;
-    }
-    .footer-brand svg{
-      width:40px; height:40px;
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .about-grid{ grid-template-columns:1fr; }
-      .about-photo{ max-width:420px; margin:0 auto; aspect-ratio:1/1; }
-      .benefits{ grid-template-columns: repeat(2,1fr); }
-      .footer-grid{ grid-template-columns:1fr 1fr; }
-      .footer-brand{ grid-column: 1 / -1; }
-    }
-    @media (max-width: 720px){
-      .nav-links{
-        position:fixed;
-        top:74px; left:0; right:0;
-        background: var(--cream);
-        flex-direction:column;
-        align-items:flex-start;
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid rgba(107,66,38,0.08);
-        transform: translateY(-110%);
-        transition: transform .35s var(--ease);
-        box-shadow: 0 16px 30px -16px rgba(74,45,25,0.2);
-        z-index:99;
-      }
-      .nav-links.open{ transform: translateY(0); }
-      .nav-toggle{ display:block; }
-      .nav-cta{ margin-top:8px; }
-      .benefits{ grid-template-columns:1fr; }
-      .section{ padding:64px 0; }
-      .section-alt{ margin: 0 14px; }
-      .quote-band{ margin:0 14px; padding:60px 24px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="texture-bg" aria-hidden="true"></div>
-<a href="#main" class="skip-link">Aller au contenu principal</a>
+  <div class="texture-bg" aria-hidden="true"></div>
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
 
-<header class="site-header">
-  <div class="container" style="padding:0;">
-    <nav class="nav">
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
       <a href="index.html" class="brand">
-        <!-- Logo SVG inline (respecte votre identité : formes organiques, couleurs terracotta et sage) -->
-        <svg class="brand-mark" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="26" stroke="#6B4226" stroke-width="1.2" fill="#FAF6F0"/>
-          <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="30" cy="30" r="8" fill="#8A9B6E" stroke="none"/>
-          <path d="M30 8 C34 18, 44 20, 46 30 C48 40, 40 48, 30 52 C20 48, 12 40, 14 30 C16 20, 26 18, 30 8 Z" stroke="#E0A98A" stroke-width="0.8" fill="none" opacity="0.6"/>
-        </svg>
+        <img src="logo.svg" alt="" class="brand-mark" aria-hidden="true">
         <span class="brand-text">
           Bien en Soi Massage
           <small>Centre de thérapie par le massage</small>
@@ -505,123 +45,106 @@
         <li><a href="https://www.gorendezvous.com/BienenSoiMassage" class="nav-cta" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
       </ul>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main id="main">
-  <section class="page-header">
-    <div class="container">
-      <p class="hero-eyebrow">Notre histoire</p>
-      <h1>À propos de Bien en Soi Massage</h1>
-      <p>Un centre de thérapie par le massage né d'une conviction simple : prendre soin de son corps, c'est prendre soin de son esprit.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container about-grid">
-      <div class="about-photo">
-        <div class="texture-lines"></div>
-        <div class="glow-spot"></div>
-        <!-- Icône symbolique représentant Martine (douceur, silhouette) -->
-        <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-          <circle cx="30" cy="16" r="4.2"/>
-          <path d="M30 20.5 C30 26, 22 27, 22 33 C22 38, 27 40, 30 40 C33 40, 38 38, 38 33 C38 27, 30 26, 30 20.5 Z"/>
-          <path d="M22 33 C16 33, 14 38, 14 40"/>
-          <path d="M38 33 C44 33, 46 38, 46 40"/>
-          <path d="M30 40 C24 44, 22 50, 24 54 C28 52, 30 46, 30 40 Z"/>
-          <path d="M30 40 C36 44, 38 50, 36 54 C32 52, 30 46, 30 40 Z"/>
-        </svg>
+  <main id="main">
+    <section class="page-header">
+      <div class="container">
+        <p class="hero-eyebrow">Notre histoire</p>
+        <h1>À propos de Bien en Soi Massage</h1>
+        <p>Un centre de thérapie par le massage né d'une conviction simple : prendre soin de son corps, c'est prendre soin de son esprit.</p>
       </div>
-      <div class="about-content">
-        <p class="section-eyebrow" style="color: var(--terracotta);">Massothérapeute diplômée</p>
-        <h2>Martine Charles</h2>
-        <p>Passionnée par le bien-être et la santé globale, Martine Charles a fait de la massothérapie sa vocation. Diplômée en massothérapie, elle met à votre service des techniques manuelles précises et une écoute attentive pour répondre aux besoins de chaque personne.</p>
-        <p>Son approche combine des soins thérapeutiques reconnus, comme le massage suédois, le drainage lymphatique et la réflexologie plantaire, avec des soins holistiques tels que le Reiki, pour offrir une expérience complète qui prend soin du corps autant que de l'esprit.</p>
-        <p>Au Centre de Thérapie par le Massage Bien en Soi, chaque rendez-vous est un moment qui vous appartient, dans un espace pensé pour la détente et le ressourcement.</p>
-        <ul class="credential-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Massothérapeute diplômée</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Spécialisation en massage thérapeutique et suédois</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Formation en drainage lymphatique et réflexologie plantaire</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Praticienne en soins holistiques Reiki</li>
-        </ul>
-        <a href="contact.html" class="btn btn-primary">Nous contacter</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" aria-label="Notre approche">
-    <div class="quote-band">
-      <blockquote>« Un esprit léger dans un corps détendu. »</blockquote>
-      <cite>— Notre philosophie</cite>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-header" style="text-align:center; margin-bottom: 32px;">
-        <p class="hero-eyebrow" style="justify-content:center;">Notre approche</p>
-        <h2 style="font-family:var(--font-display); font-size:2rem;">Une expérience centrée sur vous</h2>
-      </div>
-      <div class="benefits">
-        <div class="benefit"><div class="benefit-num">écoute</div><h4>Personnalisation</h4><p>Chaque soin est adapté à vos besoins, votre condition physique et vos objectifs de mieux-être.</p></div>
-        <div class="benefit"><div class="benefit-num">calme</div><h4>Un espace apaisant</h4><p>Un environnement chaleureux pensé pour favoriser la détente dès votre arrivée.</p></div>
-        <div class="benefit"><div class="benefit-num">expertise</div><h4>Techniques éprouvées</h4><p>Des méthodes reconnues, alliant approche thérapeutique et soins holistiques.</p></div>
-        <div class="benefit"><div class="benefit-num">constance</div><h4>Un suivi dans le temps</h4><p>Un accompagnement régulier pour des bienfaits durables sur votre santé globale.</p></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="brand" style="color:var(--cream);">
-          <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="26" stroke="#E0A98A" stroke-width="1.2" fill="none"/>
-            <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="8" fill="#8A9B6E" stroke="none"/>
+    <section class="section">
+      <div class="container about-grid">
+        <div class="about-photo">
+          <div class="texture-lines"></div>
+          <div class="glow-spot"></div>
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="30" cy="16" r="4.2"/>
+            <path d="M30 20.5 C30 26, 22 27, 22 33 C22 38, 27 40, 30 40 C33 40, 38 38, 38 33 C38 27, 30 26, 30 20.5 Z"/>
+            <path d="M22 33 C16 33, 14 38, 14 40"/>
+            <path d="M38 33 C44 33, 46 38, 46 40"/>
+            <path d="M30 40 C24 44, 22 50, 24 54 C28 52, 30 46, 30 40 Z"/>
+            <path d="M30 40 C36 44, 38 50, 36 54 C32 52, 30 46, 30 40 Z"/>
           </svg>
-          Bien en Soi Massage
-        </a>
-        <p>Centre de thérapie par le massage à Québec. Un esprit léger dans un corps détendu, grâce à des soins personnalisés et bienveillants.</p>
+        </div>
+        <div class="about-content">
+          <p class="section-eyebrow">Massothérapeute diplômée</p>
+          <h2>Martine Charles</h2>
+          <p>Passionnée par le bien-être et la santé globale, Martine Charles a fait de la massothérapie sa vocation. Diplômée en massothérapie, elle met à votre service des techniques manuelles précises et une écoute attentive pour répondre aux besoins de chaque personne.</p>
+          <p>Son approche combine des soins thérapeutiques reconnus, comme le massage suédois, le drainage lymphatique et la réflexologie plantaire, avec des soins holistiques tels que le Reiki, pour offrir une expérience complète qui prend soin du corps autant que de l'esprit.</p>
+          <p>Au Centre de Thérapie par le Massage Bien en Soi, chaque rendez-vous est un moment qui vous appartient, dans un espace pensé pour la détente et le ressourcement.</p>
+          <ul class="credential-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Massothérapeute diplômée</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Spécialisation en massage thérapeutique et suédois</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Formation en drainage lymphatique et réflexologie plantaire</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Praticienne en soins holistiques Reiki</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary">Nous contacter</a>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="produits.html">Produits</a></li>
-          <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Coordonnées</h4>
-        <ul>
-          <li>5600 boul. des Galeries, suite 125<br>Québec, QC, G2K 2H6</li>
-          <li><a href="tel:+15813092948">(581) 309-2948</a></li>
-          <li><a href="mailto:bienensoimassage@outlook.com">bienensoimassage@outlook.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Tous droits réservés.
-    </div>
-  </div>
-</footer>
+    </section>
 
-<script>
-  // Menu mobile toggle (identique à votre script original)
-  const toggleBtn = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true' ? false : true;
-      toggleBtn.setAttribute('aria-expanded', expanded);
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
+    <section class="section" aria-label="Notre approche">
+      <div class="quote-band">
+        <blockquote>« Un esprit léger dans un corps détendu. »</blockquote>
+        <cite>— Notre philosophie</cite>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header" style="text-align:center; margin-bottom: 32px;">
+          <p class="hero-eyebrow">Notre approche</p>
+          <h2>Une expérience centrée sur vous</h2>
+        </div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-num">écoute</div><h4>Personnalisation</h4><p>Chaque soin est adapté à vos besoins, votre condition physique et vos objectifs de mieux-être.</p></div>
+          <div class="benefit"><div class="benefit-num">calme</div><h4>Un espace apaisant</h4><p>Un environnement chaleureux pensé pour favoriser la détente dès votre arrivée.</p></div>
+          <div class="benefit"><div class="benefit-num">expertise</div><h4>Techniques éprouvées</h4><p>Des méthodes reconnues, alliant approche thérapeutique et soins holistiques.</p></div>
+          <div class="benefit"><div class="benefit-num">constance</div><h4>Un suivi dans le temps</h4><p>Un accompagnement régulier pour des bienfaits durables sur votre santé globale.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <img src="logo.svg" alt="" class="brand-mark" aria-hidden="true">
+            Bien en Soi Massage
+          </a>
+          <p>Centre de thérapie par le massage à Québec. Un esprit léger dans un corps détendu, grâce à des soins personnalisés et bienveillants<a href="admin.html" class="admin-dot" aria-label="Administration" title="">.</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="produits.html">Produits</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Coordonnées</h4>
+          <ul>
+            <li><p>5600 boul. des Galeries, suite 125<br>Québec, QC, G2K 2H6</p></li>
+            <li><a href="tel:+15813092948">(581) 309-2948</a></li>
+            <li><a href="mailto:bienensoimassage@outlook.com">bienensoimassage@outlook.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
