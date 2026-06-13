@@ -12,7 +12,7 @@
   <meta property="og:description" content="Massage thérapeutique, suédois, femme enceinte, drainage lymphatique, réflexologie plantaire et plus encore à Québec.">
   <meta property="og:locale" content="fr_CA">
 
-  <!-- Google Fonts (identiques à votre CSS) -->
+  <!-- Google Fonts (exactement vos polices) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
   <style>
     /* =========================================================
        Centre de Thérapie par le Massage - Bien en Soi
-       Design tokens (exactement vos variables)
+       Design tokens (EXACTEMENT vos variables)
        ========================================================= */
     :root{
       --cream:        #FAF6F0;
@@ -55,8 +55,6 @@
       overflow-x:hidden;
     }
 
-    img{ max-width:100%; display:block; }
-
     a{ color:inherit; text-decoration:none; }
 
     h1,h2,h3,h4{
@@ -73,21 +71,6 @@
       padding: 0 24px;
     }
 
-    /* Skip link */
-    .skip-link{
-      position:absolute; left:-999px; top:auto;
-    }
-    .skip-link:focus{
-      position:fixed; left:16px; top:16px; z-index:999;
-      background:var(--walnut); color:var(--cream);
-      padding:10px 18px; border-radius:8px;
-    }
-
-    :focus-visible{
-      outline: 3px solid var(--terracotta);
-      outline-offset: 3px;
-    }
-
     /* Texture de fond */
     .texture-bg{
       position: fixed;
@@ -100,7 +83,7 @@
       pointer-events:none;
     }
 
-    /* Header / Nav */
+    /* Header / Nav (identique à votre design) */
     .site-header{
       position: sticky;
       top:0;
@@ -220,7 +203,7 @@
       text-transform: uppercase;
       color: var(--terracotta);
       margin-bottom: 16px;
-      justify-content:center;
+      display: inline-block;
     }
     .page-header h1{
       font-size: clamp(2.4rem, 4.5vw, 3.6rem);
@@ -232,17 +215,12 @@
       font-size:1.05rem;
     }
 
-    /* Section de base */
+    /* Section */
     .section{
       padding: 88px 0;
     }
-    .section-alt{
-      background: var(--cream-deep);
-      border-radius: var(--radius-soft);
-      margin: 0 24px;
-    }
 
-    /* Détail des services (liste) */
+    /* Détail des services */
     .service-detail{
       display:grid;
       grid-template-columns: 70px 1fr;
@@ -261,15 +239,18 @@
       justify-content:center;
       color: var(--terracotta);
     }
-    .service-detail-icon svg{ width:28px; height:28px; }
-
+    .service-detail-icon svg{
+      width:28px; height:28px;
+    }
     .service-detail h3{
       font-size:1.3rem;
       margin-bottom:8px;
     }
-    .service-detail p{ color:#5C4B3E; }
+    .service-detail p{
+      color:#5C4B3E;
+    }
 
-    /* Booking card */
+    /* Booking CTA */
     .booking-card{
       background: linear-gradient(150deg, var(--terracotta), var(--terracotta-soft));
       color: var(--cream);
@@ -322,7 +303,13 @@
       gap: 40px;
       margin-bottom: 48px;
     }
-    .footer-brand .brand{ color: var(--cream); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+    .footer-brand .brand{
+      color: var(--cream);
+      margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
     .footer-brand p{
       color: #C9B8AC;
       max-width: 320px;
@@ -335,13 +322,20 @@
       text-transform:uppercase;
       margin-bottom:18px;
     }
-    .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .footer-col ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
     .footer-col a, .footer-col p{
       color:#D9CCC2;
       font-size:0.92rem;
       transition: color .2s;
     }
-    .footer-col a:hover{ color: var(--terracotta-soft); }
+    .footer-col a:hover{
+      color: var(--terracotta-soft);
+    }
     .footer-bottom{
       border-top: 1px solid rgba(250,246,240,0.1);
       padding-top: 24px;
@@ -349,14 +343,15 @@
       font-size:0.85rem;
       color:#9C8C80;
     }
-    .footer-brand svg{
-      width:40px; height:40px;
-    }
 
     /* Responsive */
     @media (max-width: 980px){
-      .footer-grid{ grid-template-columns:1fr 1fr; }
-      .footer-brand{ grid-column: 1 / -1; }
+      .footer-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .footer-brand{
+        grid-column: 1 / -1;
+      }
     }
     @media (max-width: 720px){
       .nav-links{
@@ -373,29 +368,37 @@
         box-shadow: 0 16px 30px -16px rgba(74,45,25,0.2);
         z-index:99;
       }
-      .nav-links.open{ transform: translateY(0); }
-      .nav-toggle{ display:block; }
-      .nav-cta{ margin-top:8px; }
-      .section{ padding:64px 0; }
-      .section-alt{ margin: 0 14px; }
-      .service-detail{ grid-template-columns:56px 1fr; }
+      .nav-links.open{
+        transform: translateY(0);
+      }
+      .nav-toggle{
+        display:block;
+      }
+      .nav-cta{
+        margin-top:8px;
+      }
+      .section{
+        padding:64px 0;
+      }
+      .service-detail{
+        grid-template-columns:56px 1fr;
+      }
     }
   </style>
 </head>
 <body>
 <div class="texture-bg" aria-hidden="true"></div>
-<a href="#main" class="skip-link">Aller au contenu principal</a>
 
 <header class="site-header">
   <div class="container" style="padding:0;">
     <nav class="nav">
       <a href="index.html" class="brand">
-        <!-- Logo SVG inline (identique à votre identité) -->
+        <!-- Logo SVG conforme à votre identité : cercle, croix, petit cercle intérieur -->
         <svg class="brand-mark" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="26" stroke="#6B4226" stroke-width="1.2" fill="#FAF6F0"/>
+          <circle cx="30" cy="30" r="26" stroke="#6B4226" stroke-width="1.5" fill="#FAF6F0"/>
           <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="30" cy="30" r="8" fill="#8A9B6E" stroke="none"/>
-          <path d="M30 8 C34 18, 44 20, 46 30 C48 40, 40 48, 30 52 C20 48, 12 40, 14 30 C16 20, 26 18, 30 8 Z" stroke="#E0A98A" stroke-width="0.8" fill="none" opacity="0.6"/>
+          <circle cx="30" cy="30" r="8" fill="#8A9B6E"/>
+          <path d="M30 8 C34 18, 44 20, 46 30 C48 40, 40 48, 30 52 C20 48, 12 40, 14 30 C16 20, 26 18, 30 8 Z" stroke="#E0A98A" stroke-width="0.8" fill="none" opacity="0.4"/>
         </svg>
         <span class="brand-text">
           Bien en Soi Massage
@@ -417,10 +420,10 @@
   </div>
 </header>
 
-<main id="main">
+<main>
   <section class="page-header">
     <div class="container">
-      <p class="hero-eyebrow">Liste des soins offerts</p>
+      <div class="hero-eyebrow">Liste des soins offerts</div>
       <h1>Nos services</h1>
       <p>Chaque soin est offert par Martine Charles, massothérapeute diplômée, et adapté à vos besoins spécifiques pour un mieux-être durable du corps et de l'esprit.</p>
     </div>
@@ -510,7 +513,7 @@
           <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="30" cy="30" r="26" stroke="#E0A98A" stroke-width="1.2" fill="none"/>
             <path d="M30 12 L30 48 M12 30 L48 30" stroke="#C97B5C" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="8" fill="#8A9B6E" stroke="none"/>
+            <circle cx="30" cy="30" r="8" fill="#8A9B6E"/>
           </svg>
           Bien en Soi Massage
         </a>
@@ -542,7 +545,6 @@
 </footer>
 
 <script>
-  // Menu mobile toggle
   const toggleBtn = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (toggleBtn) {
