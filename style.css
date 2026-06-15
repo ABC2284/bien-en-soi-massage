@@ -761,24 +761,64 @@ h1,h2,h3,h4{
   .footer-brand{ grid-column: 1 / -1; }
 }
 
+/* =========================================================
+   CORRECTION MOBILE (max-width: 720px)
+   ========================================================= */
 @media (max-width: 720px){
   .nav-links{
-    position:fixed;
-    top:74px; left:0; right:0;
+    position: fixed;
+    top: 74px;
+    left: 0;
+    right: 0;
     background: var(--cream);
-    flex-direction:column;
-    align-items:flex-start;
+    flex-direction: column;
+    align-items: stretch;      /* ← ÉTIRER LES ÉLÉMENTS EN LARGEUR */
     padding: 24px;
-    gap: 20px;
+    gap: 16px;
     border-bottom: 1px solid rgba(107,66,38,0.08);
     transform: translateY(-110%);
     transition: transform .35s var(--ease);
     box-shadow: 0 16px 30px -16px rgba(74,45,25,0.2);
+    z-index: 99;
   }
-  .nav-links.open{ transform: translateY(0); }
-  .nav-toggle{ display:block; }
-  .nav-cta{ margin-top:8px; }
 
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  .nav-links.open{
+    transform: translateY(0);
+  }
+
+  .nav-toggle{
+    display: block;
+  }
+
+  /* Bouton « Prendre rendez-vous » en version mobile */
+  .nav-cta{
+    background: var(--terracotta);
+    color: var(--cream) !important;
+    padding: 12px 20px;
+    border-radius: 60px;
+    text-align: center;
+    margin-top: 8px;
+    white-space: normal;       /* Permet au texte de passer à la ligne si besoin */
+    box-shadow: none;
+    display: block;
+    width: auto;
+  }
+  .nav-cta:hover{
+    transform: none;
+  }
+
+  /* Autres réglages responsives existants */
   .services-grid{ grid-template-columns:1fr; }
   .benefits{ grid-template-columns:1fr 1fr; }
   .section{ padding:64px 0; }
