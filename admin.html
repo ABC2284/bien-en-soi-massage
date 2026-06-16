@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administration | Bien en Soi Massage</title>
+  <title>Administration | Clinique de massothérapie et soins holistiques</title>
   <meta name="robots" content="noindex, nofollow">
 
-  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <!-- Favicon corrigé (à la racine) -->
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <!-- CSS corrigé (plus de dossier "css/") -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="texture-bg" aria-hidden="true"></div>
@@ -21,10 +23,9 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Navigation principale">
       <a href="index.html" class="brand">
-        <img src="images/logo.svg" alt="" class="brand-mark" aria-hidden="true">
+        <img src="logo.svg" alt="" class="brand-mark" aria-hidden="true">
         <span class="brand-text">
-          Bien en Soi Massage
-          <small>Administration</small>
+          Clinique de massothérapie<br><small>Administration</small>
         </span>
       </a>
       <ul class="nav-links" style="position:static; transform:none; flex-direction:row; padding:0; border:none; box-shadow:none; background:transparent;">
@@ -59,10 +60,9 @@
           </form>
         </div>
 
-        <!-- ===================== ADMIN PANEL (hidden until login) ===================== -->
+        <!-- ===================== ADMIN PANEL ===================== -->
         <div id="admin-panel" style="display:none;">
 
-          <!-- Add product form -->
           <div class="admin-card">
             <h2>Ajouter un produit</h2>
             <p class="admin-sub">Remplissez les informations ci-dessous. Le produit apparaîtra immédiatement sur la page « Produits ».</p>
@@ -95,7 +95,6 @@
             </form>
           </div>
 
-          <!-- Existing products list -->
           <div class="admin-card">
             <h2>Produits actuels</h2>
             <p class="admin-sub">Cliquez sur « Supprimer » pour retirer un produit du site.</p>
@@ -111,24 +110,19 @@
     </section>
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        &copy; 2026 Bien en Soi Massage — Centre de thérapie par le massage. Page d'administration.
+        &copy; 2026 Clinique de massothérapie et soins holistiques — Page d'administration.
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/produits.js"></script>
+  <script src="produits.js"></script>
   <script>
     /* =========================================================
        ⚠️ Mot de passe d'accès à l'administration.
-       Changez cette valeur pour quelque chose de personnel.
-       Ceci est une protection simple, pas un système de
-       sécurité avancé — ne l'utilisez pas pour des données
-       très sensibles.
        ========================================================= */
     const ADMIN_PASSWORD = "bienensoi2026";
 
@@ -137,7 +131,6 @@
     const loginForm = document.getElementById('login-form');
     const loginMsg = document.getElementById('login-msg');
 
-    // Check if already logged in this session
     if (sessionStorage.getItem('bes_admin_ok') === 'true') {
       showAdmin();
     }
@@ -160,7 +153,6 @@
       loadProducts();
     }
 
-    // ===================== Product form =====================
     const productForm = document.getElementById('product-form');
     const formMsg = document.getElementById('form-msg');
     const submitBtn = document.getElementById('submit-btn');
@@ -209,7 +201,6 @@
       formMsg.className = 'admin-msg ' + type + ' show';
     }
 
-    // ===================== Product list =====================
     async function loadProducts(){
       const list = document.getElementById('admin-products-list');
       const emptyMsg = document.getElementById('admin-products-empty');
