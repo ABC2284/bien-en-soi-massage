@@ -16,6 +16,93 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Correction mobile : menu hamburger sous le bouton + suppression barre blanche -->
+  <style>
+    /* --- Menu hamburger --- */
+    .nav-toggle {
+      display: block !important;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: #4A2D19;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #FAF6F0;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 20px 24px;
+      gap: 16px;
+      border-bottom: 1px solid rgba(107,66,38,0.08);
+      transform: scaleY(0);
+      transform-origin: top center;
+      transition: transform 0.35s ease;
+      box-shadow: 0 16px 30px -16px rgba(74,45,25,0.2);
+      z-index: 99;
+      display: flex !important;
+      pointer-events: none;
+    }
+    .nav-links.open {
+      transform: scaleY(1);
+      pointer-events: auto;
+    }
+    .nav-links li {
+      width: 100%;
+      text-align: center;
+    }
+    .nav-links a {
+      display: block;
+      padding: 12px 0;
+      font-size: 1.1rem;
+    }
+    .site-header {
+      position: relative;
+    }
+    .nav {
+      position: relative;
+    }
+
+    /* --- Suppression de toute barre blanche --- */
+    .hero-eyebrow {
+      border-bottom: none !important;
+      margin-bottom: 0 !important;
+    }
+    .page-header .hero-eyebrow {
+      border-bottom: none !important;
+      margin-bottom: 0 !important;
+    }
+    .hero h1 {
+      border-top: none !important;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    .page-header h1 {
+      border-top: none !important;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    .hero .hero-text,
+    .page-header .container {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    hr {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
   <div class="texture-bg" aria-hidden="true"></div>
@@ -29,6 +116,7 @@
           Clinique de massothérapie<br><small>et soins holistiques</small>
         </span>
       </a>
+      <!-- Bouton hamburger (3 traits) -->
       <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -38,7 +126,6 @@
         <li><a href="produits.html">Produits</a></li>
         <li><a href="a-propos.html">À propos</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <!-- Le bouton "Prendre rendez-vous" a été retiré du menu -->
       </ul>
     </nav>
   </header>
