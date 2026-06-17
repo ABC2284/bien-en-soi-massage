@@ -16,6 +16,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Règle pour supprimer toute barre blanche parasite dans la section hero -->
+  <style>
+    .hero .hero-eyebrow {
+      border-bottom: none !important;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      border-top: none !important;
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+    .hero-text {
+      border: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,7 +76,7 @@
         <li><a href="produits.html">Produits</a></li>
         <li><a href="a-propos.html">À propos</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <!-- Le bouton "Prendre rendez-vous" a été retiré du menu -->
+        <!-- Bouton rendez-vous retiré du menu -->
       </ul>
     </nav>
   </header>
