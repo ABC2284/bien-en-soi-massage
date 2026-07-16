@@ -1,61 +1,80 @@
 /* =========================================================
-   Clinique de massothérapie — Connexion Supabase (Produits)
+   Clinique de massothérapie — Connexion Firebase (Produits)
    ========================================================= */
 
-const SUPABASE_URL = "https://tiqhglhgsjpywnwhtgvtr.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_7o9VsyedW9QaY59x4TNVow_SfRSr4Sc";
+// Configuration Firebase (remplacez par vos valeurs)
+const firebaseConfig = {
+  apiKey: "AIZaSyCMbdgCKnIq5vTjTD0fechZP3rE3bR1Pn8",
+  authDomain: "clinique-produits.firebaseapp.com",
+  projectId: "clinique-produits",
+  storageBucket: "clinique-produits.firebasestorage.app",
+  messagingSenderId: "107596157193",
+  appId: "1:107596157193:web:9bf90245183bc3e43703d8",
+  measurementId: "G-2R418EL9XP"
+};
 
-const supabaseClient = (typeof supabase !== "undefined")
-  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
+// Initialiser Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
 
-const TABLE_NAME = "products";  // ← MODIFIÉ
+const COLLECTION_NAME = "produits";
 
+// ==================== FONCTIONS ====================
+
+// Récupérer tous les produits
 async function fetchProducts() {
-  if (!supabaseClient) return [];
-  const { data, error } = await supabaseClient
-    .from(TABLE_NAME)
-    .select("*")
-    .order("created_at", { ascending: false });
-  if (error) {
+  try {
+    const snapshot = await db.collection(COLLECTION_NAME).orderBy("created_at", "desc").get();
+    const products = [];
+    snapshot.forEach(doc => {
+      products.push({ id: doc.id, ...doc.data() });
+    });
+    return products;
+  } catch (error) {
     console.error("Erreur lors du chargement des produits :", error);
     return [];
   }
-  return data || [];
 }
 
+// Ajouter un produit
 async function addProduct(product) {
-  if (!supabaseClient) return { error: "Supabase non configuré" };
-  const { data, error } = await supabaseClient
-    .from(TABLE_NAME)
-    .insert([product])
-    .select();
-  return { data, error };
+  try {
+    const docRef = await db.collection(COLLECTION_NAME).add({
+      ...product,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return { data: { id: docRef.id } };
+  } catch (error) {
+    return { error };
+  }
 }
 
+// Supprimer un produit
 async function deleteProduct(id) {
-  if (!supabaseClient) return { error: "Supabase non configuré" };
-  const { error } = await supabaseClient
-    .from(TABLE_NAME)
-    .delete()
-    .eq("id", id);
-  return { error };
+  try {
+    await db.collection(COLLECTION_NAME).doc(id).delete();
+    return {};
+  } catch (error) {
+    return { error };
+  }
 }
 
+// Uploader une image vers Firebase Storage
 async function uploadProductImage(file) {
-  if (!supabaseClient) return { error: "Supabase non configuré" };
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-  const { error: uploadError } = await supabaseClient.storage
-    .from("products")  // ← MODIFIÉ
-    .upload(fileName, file);
-  if (uploadError) return { error: uploadError };
-  const { data } = supabaseClient.storage
-    .from("products")  // ← MODIFIÉ
-    .getPublicUrl(fileName);
-  return { data: { publicUrl: data.publicUrl } };
+  try {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    const storageRef = storage.ref().child(`produits/${fileName}`);
+    const snapshot = await storageRef.put(file);
+    const publicUrl = await snapshot.ref.getDownloadURL();
+    return { data: { publicUrl } };
+  } catch (error) {
+    return { error };
+  }
 }
 
+// Formater le prix
 function formatPrice(prix) {
   const n = parseFloat(prix);
   if (isNaN(n)) return prix;
