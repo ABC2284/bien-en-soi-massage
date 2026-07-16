@@ -19,7 +19,6 @@
 
   <!-- Correction mobile : menu hamburger sous le bouton + suppression barre blanche -->
   <style>
-    /* --- Menu hamburger --- */
     .nav-toggle {
       display: block !important;
       background: none;
@@ -74,8 +73,6 @@
     .nav {
       position: relative;
     }
-
-    /* --- Suppression de toute barre blanche --- */
     .hero-eyebrow {
       border-bottom: none !important;
       margin-bottom: 0 !important;
@@ -116,7 +113,6 @@
           Clinique de massothérapie<br><small>et soins holistiques</small>
         </span>
       </a>
-      <!-- Bouton hamburger (3 traits) -->
       <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -204,7 +200,10 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- ========== FIREBASE SCRIPTS ========== -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
   <script src="produits.js"></script>
   <script src="main.js"></script>
   <script>
