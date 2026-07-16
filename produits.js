@@ -4,13 +4,14 @@
 
 // Configuration Firebase (remplacez par vos valeurs)
 const firebaseConfig = {
-  apiKey: "AIZaSyCMbdgCKnIq5vTjTD0fechZP3rE3bR1Pn8",
+  apiKey: "AIzaSyCMbdgCKnIq5vTjTD0fechZP3rE3bR1Pn8",
   authDomain: "clinique-produits.firebaseapp.com",
   projectId: "clinique-produits",
   storageBucket: "clinique-produits.firebasestorage.app",
   messagingSenderId: "107596157193",
   appId: "1:107596157193:web:9bf90245183bc3e43703d8",
   measurementId: "G-2R418EL9XP"
+};
 };
 
 // Initialiser Firebase
