@@ -2,6 +2,7 @@
    Clinique de massothérapie — Connexion Firebase (Produits)
    ========================================================= */
 
+// Configuration Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCMbdgCKnIq5vTjTD0fechZP3rE3bR1Pn8",
   authDomain: "clinique-produits.firebaseapp.com",
@@ -15,11 +16,10 @@ const firebaseConfig = {
 // Initialiser Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 const COLLECTION_NAME = "produits";
 
-// ==================== FONCTIONS (EXPORTÉES GLOBALEMENT) ====================
+// ==================== FONCTIONS ====================
 
 // Récupérer tous les produits
 window.fetchProducts = async function() {
@@ -61,23 +61,28 @@ window.deleteProduct = async function(id) {
   }
 };
 
-// Uploader une image vers Firebase Storage
+// Uploader une image (convertie en Base64, sans Firebase Storage)
 window.uploadProductImage = async function(file) {
   if (!file) {
     return { error: "Aucun fichier sélectionné" };
   }
-  try {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-    const storageRef = storage.ref().child(`produits/${fileName}`);
-    const snapshot = await storageRef.put(file);
-    const publicUrl = await snapshot.ref.getDownloadURL();
-    console.log("✅ Image uploadée :", publicUrl);
-    return { data: { publicUrl } };
-  } catch (error) {
-    console.error("❌ Erreur lors de l'upload de l'image :", error);
-    return { error };
+
+  // Vérifier la taille (limite 1 Mo pour Firestore)
+  if (file.size > 1024 * 1024) {
+    return { error: "L'image est trop lourde (max 1 Mo). Veuillez la réduire." };
   }
+
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const base64 = ev.target.result; // data:image/png;base64,...
+      resolve({ data: { publicUrl: base64 } });
+    };
+    reader.onerror = () => {
+      resolve({ error: "Erreur lors de la lecture du fichier" });
+    };
+    reader.readAsDataURL(file);
+  });
 };
 
 // Formater le prix
@@ -87,4 +92,4 @@ window.formatPrice = function(prix) {
   return n.toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
 };
 
-console.log("✅ produits.js chargé avec succès !");
+console.log("✅ produits.js chargé avec succès (Base64) !");
