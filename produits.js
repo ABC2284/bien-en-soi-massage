@@ -4,7 +4,7 @@
 
 // ⚠️ Remplacez ces valeurs par les vôtres (régénérez d'abord votre clé)
 const SUPABASE_URL = "https://tiqhglhgsjpywnwhtgvtr.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_gs2gvcoT1SAFdpIIq23slA_-Jy4wzUY";
+const SUPABASE_ANON_KEY = "sb_publishable_7o9VsyedW9QaY59x4TNVow_SfRSr4Sc";
 
 const supabaseClient = (typeof supabase !== "undefined")
   ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
