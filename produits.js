@@ -2,7 +2,6 @@
    Clinique de massothérapie — Connexion Supabase (Produits)
    ========================================================= */
 
-// ⚠️ Remplacez ces valeurs par les vôtres (régénérez d'abord votre clé)
 const SUPABASE_URL = "https://tiqhglhgsjpywnwhtgvtr.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_7o9VsyedW9QaY59x4TNVow_SfRSr4Sc";
 
@@ -10,7 +9,7 @@ const supabaseClient = (typeof supabase !== "undefined")
   ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
   : null;
 
-const TABLE_NAME = "produits";
+const TABLE_NAME = "products";  // ← MODIFIÉ
 
 async function fetchProducts() {
   if (!supabaseClient) return [];
@@ -48,10 +47,12 @@ async function uploadProductImage(file) {
   const fileExt = file.name.split('.').pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
   const { error: uploadError } = await supabaseClient.storage
-    .from("produits")
+    .from("products")  // ← MODIFIÉ
     .upload(fileName, file);
   if (uploadError) return { error: uploadError };
-  const { data } = supabaseClient.storage.from("produits").getPublicUrl(fileName);
+  const { data } = supabaseClient.storage
+    .from("products")  // ← MODIFIÉ
+    .getPublicUrl(fileName);
   return { data: { publicUrl: data.publicUrl } };
 }
 
